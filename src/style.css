@@ -149,7 +149,7 @@ main.is-glitching > :not(.pin-spacer), main.is-glitching .pin-spacer > * { anima
   pointer-events: auto; display: flex; align-items: center; padding: 0; border: 0;
   background: transparent; box-shadow: none;
 }
-.deck-badge { flex: 0 0 auto; width: 50px; height: 50px; padding: 0; border: 0; background: transparent; cursor: pointer; display: block; }
+.deck-badge { flex: 0 0 auto; width: 50px; height: 50px; padding: 0; border: 0; border-radius: 50%; background: transparent; cursor: pointer; display: block; }
 .deck-badge img { display: block; width: 50px; height: 50px; object-fit: contain; filter: drop-shadow(0 0 8px rgba(77,255,140,0.6)); transform: none !important; transition: filter .2s ease; }
 .deck-badge:hover img { transform: none !important; filter: drop-shadow(0 0 14px rgba(77,255,140,0.95)); }
 .deck-links { display: none; }
