@@ -146,23 +146,13 @@ main.is-glitching > :not(.pin-spacer), main.is-glitching .pin-spacer > * { anima
    velvele.studio: open at the top of the page, folded to the badge once you scroll, and it unfolds again on hover,
    focus or a tap on the badge. It also stays open while a view is open, since there is nothing to scroll there. */
 .deck {
-  pointer-events: auto; display: flex; align-items: center; padding: 0; border-radius: 8px; border: 0;
+  pointer-events: auto; display: flex; align-items: center; padding: 0; border: 0;
   background: transparent; box-shadow: none;
 }
-.deck-badge { flex: 0 0 auto; width: 50px; height: 50px; padding: 0; border: 0; border-radius: 4px; background: transparent; cursor: pointer; display: block; }
-.deck-badge img { display: block; width: 50px; height: 50px; object-fit: contain; filter: drop-shadow(0 0 8px rgba(77,255,140,0.6)); transition: transform .28s cubic-bezier(.2,.8,.2,1), filter .28s cubic-bezier(.2,.8,.2,1); }
-.deck-badge:hover img { transform: scale(1.1); filter: drop-shadow(0 0 16px rgba(77,255,140,0.95)) drop-shadow(0 0 28px rgba(77,255,140,0.5)); }
-.deck-links { display: grid; grid-template-columns: 0fr; transition: grid-template-columns .45s cubic-bezier(.2,.8,.2,1); }
-.deck-links-in { min-width: 0; overflow: hidden; display: flex; align-items: center; gap: 20px; padding: 8px 0; opacity: 0; transition: padding .45s cubic-bezier(.2,.8,.2,1), opacity .25s; }
-.deck:hover .deck-links,
-.deck.is-open .deck-links { grid-template-columns: 1fr; }
-.deck:hover .deck-links-in,
-.deck.is-open .deck-links-in {
-  padding: 8px 18px; margin-left: 12px;
-  background: rgba(0,0,0,.65); -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px);
-  box-shadow: 0 10px 30px rgba(0,0,0,.45); border-radius: 8px;
-  opacity: 1; transition-delay: 0s, .12s;
-}
+.deck-badge { flex: 0 0 auto; width: 50px; height: 50px; padding: 0; border: 0; background: transparent; cursor: pointer; display: block; }
+.deck-badge img { display: block; width: 50px; height: 50px; object-fit: contain; filter: drop-shadow(0 0 8px rgba(77,255,140,0.6)); transform: none !important; transition: filter .2s ease; }
+.deck-badge:hover img { transform: none !important; filter: drop-shadow(0 0 14px rgba(77,255,140,0.95)); }
+.deck-links { display: none; }
 /* the links speak in the deck's OSD voice, like REC, the speaker and the play counter: white with the glow and the chroma fringe, green when on */
 .deck button[data-view] {
   font-family: var(--font-osd); font-size: 14px; font-weight: 400; letter-spacing: .04em; text-transform: uppercase; color: #fff;
