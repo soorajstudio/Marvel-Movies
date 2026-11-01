@@ -40,14 +40,7 @@ export default function DoomsdaySection() {
         zIndex: 2
       }}
     >
-      <div
-        style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-          gap: 'clamp(32px, 5vw, 64px)',
-          alignItems: 'center'
-        }}
-      >
+      <div className="doomsday-grid">
         {/* Left Column: Doctor Doom Poster in Retro VHS Frame */}
         <div className="film-poster" style={{ width: '100%', maxWidth: '440px', margin: '0 auto' }}>
           <div className="frame">
@@ -120,21 +113,7 @@ export default function DoomsdaySection() {
           </p>
 
           {/* Countdown Clock Display */}
-          <div
-            style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(4, 1fr)',
-              gap: '12px',
-              maxWidth: '520px',
-              margin: '0 0 28px',
-              padding: '18px',
-              background: 'rgba(7, 9, 12, 0.9)',
-              border: '1px solid rgba(77, 255, 140, 0.3)',
-              borderRadius: '8px',
-              boxShadow: '0 0 35px rgba(31, 61, 43, 0.5), inset 0 0 20px rgba(0, 0, 0, 0.8)',
-              textAlign: 'center'
-            }}
-          >
+          <div className="doomsday-countdown">
             <div>
               <div
                 style={{

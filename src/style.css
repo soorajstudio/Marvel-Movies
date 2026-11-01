@@ -474,13 +474,32 @@ button.stream { background: transparent; border-width: 0 0 1px; border-style: so
 
 /* ---------- responsive ---------- */
 @media (max-width: 860px) {
-  .film { grid-template-columns: 1fr; padding: 12vh 6vw; gap: 31px; min-height: 0; }
+  /* Mobile: stack horizontal weeks vertically so all movies are reachable */
+  .week--h { overflow: visible !important; }
+  .week--h .track { display: block !important; width: 100% !important; transform: none !important; }
+  .week--h .film {
+    flex: initial !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    padding: 10vh 5vw !important;
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    overflow: hidden !important;
+  }
+  .week--h .film-day { top: 2vh !important; font-size: 40vw !important; right: 4vw !important; }
+  .week--h .film-poster { width: min(100%, 300px) !important; justify-self: center !important; margin: 0 auto !important; }
+  .week--h .film-poster img { height: auto !important; width: 100% !important; aspect-ratio: 2 / 3 !important; }
+  .week--h .film-copy { max-width: 100% !important; }
+  .week--h .film-title { font-size: clamp(32px, 8vw, 56px) !important; }
+
+  .film { grid-template-columns: 1fr; padding: 10vh 5vw; gap: 28px; min-height: 0; overflow: hidden; }
   .film:nth-child(even) .film-poster, .film:nth-child(even) .film-copy { order: initial; }
-  .film .film-poster { justify-self: start !important; width: min(100%, 280px) !important; }   /* Figma 38:252: the poster sits left over the copy, 280 wide */
+  .film .film-poster { justify-self: center !important; margin: 0 auto !important; width: min(100%, 300px) !important; }
   .film .film-poster img { height: auto !important; width: 100% !important; aspect-ratio: 2 / 3 !important; }
-  .film-kicker { justify-content: flex-start; margin-bottom: 20px; }
+  .film-kicker { justify-content: flex-start; margin-bottom: 16px; }
   .film-kicker-line { display: none; }
-  .film-day { font-size: 44vw; top: 2vh; }
+  .film-day { font-size: 40vw; top: 2vh; }
   .list a { grid-template-columns: 28px 60px minmax(0, 1fr) 48px; column-gap: 12px; padding: 12px 4px; min-height: 56px; }
   .list .m, .list .lk, .mine .checklist .m { display: none; }
   .mine .checklist li { grid-template-columns: 28px 60px minmax(0, 1fr) 48px auto; column-gap: 12px; padding: 12px 4px; min-height: 56px; }
@@ -695,19 +714,26 @@ button.stream { background: transparent; border-width: 0 0 1px; border-style: so
 
 /* the lockup on phones (Figma 38:252) */
 @media (max-width: 720px) {
-  .film { grid-template-columns: minmax(0, 1fr); gap: 31px; align-content: center; }
+  .film { grid-template-columns: minmax(0, 1fr); gap: 28px; align-content: center; }
   .film:nth-child(even) .film-poster, .film:nth-child(even) .film-copy { order: 0; }
-  .film-poster, .film:nth-child(4n+1) .film-poster, .film:nth-child(4n+3) .film-poster { width: min(100%, 280px); justify-self: start; }
-  .film-kicker { text-align: left; margin-bottom: 16px; justify-content: flex-start; }
+  .film-poster, .film:nth-child(4n+1) .film-poster, .film:nth-child(4n+3) .film-poster {
+    width: min(100%, 300px);
+    justify-self: center;
+    margin: 0 auto;
+  }
+  .film-kicker { text-align: left; margin-bottom: 14px; justify-content: flex-start; }
   .film-kicker-line { display: none; }
-  .film-title { font-size: clamp(32px, 8vw, 48px); line-height: 1.1; }
-  .film-blurb { font-size: 15px; margin-bottom: 24px; }
-  .actions { margin-bottom: 18px; }
-  .watch-row, .watch { width: 100%; }
-  .stream { padding: 12px 0; }
-  .rate { gap: 20px; }
-  .rate .thumb { width: 24px; height: 24px; }
-  .rate button { font-size: 14.35px; gap: 8px; }
+  .film-title { font-size: clamp(28px, 7.5vw, 44px); line-height: 1.1; }
+  .film-meta { gap: 8px 12px; font-size: 13px; margin-bottom: 18px; }
+  .film-box-office { font-size: 12px; padding: 3px 8px; }
+  .film-blurb { font-size: 15px; margin-bottom: 20px; line-height: 1.6; }
+  .actions { margin-bottom: 16px; }
+  .watch-row, .watch { width: 100%; justify-content: center; }
+  .stream { padding: 8px 0; }
+  .film-copy .links { justify-content: space-between; gap: 12px; }
+  .rate { gap: 16px; }
+  .rate .thumb { width: 22px; height: 22px; }
+  .rate button { font-size: 14px; gap: 6px; }
 }
 
 /* the Konami code: dark room, the hand, one line of lettering; scanlines over the lot */
@@ -821,14 +847,47 @@ html.is-bare .vhs-track, html.is-bare .hero-inner, html.is-bare .topbar, html.is
 
 @media (max-width: 720px) {
   .timeline-nav {
-    top: 68px;
-    max-width: calc(100vw - 24px);
+    top: 64px;
+    width: calc(100vw - 20px);
+    max-width: calc(100vw - 20px);
+  }
+  .timeline-nav-inner {
+    padding: 3px 5px;
+    gap: 3px;
+    -webkit-overflow-scrolling: touch;
   }
   .timeline-nav-item {
-    padding: 5px 9px;
-    font-size: 10px;
-    gap: 4px;
+    padding: 5px 8px;
+    font-size: 9.5px;
+    gap: 3px;
+    flex-shrink: 0;
   }
+}
+
+/* ---------- Doomsday Section Responsive ---------- */
+.doomsday-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+  gap: clamp(32px, 5vw, 64px);
+  align-items: center;
+}
+.doomsday-countdown {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  max-width: 520px;
+  margin: 0 0 28px;
+  padding: 18px;
+  background: rgba(7, 9, 12, 0.9);
+  border: 1px solid rgba(77, 255, 140, 0.3);
+  border-radius: 8px;
+  box-shadow: 0 0 35px rgba(31, 61, 43, 0.5), inset 0 0 20px rgba(0, 0, 0, 0.8);
+  text-align: center;
+}
+@media (max-width: 720px) {
+  .doomsday-section { padding: 10vh 5vw !important; }
+  .doomsday-grid { grid-template-columns: 1fr !important; gap: 36px !important; }
+  .doomsday-countdown { gap: 6px !important; padding: 12px 6px !important; }
 }
 
 /* Hide legacy OSD corners */
