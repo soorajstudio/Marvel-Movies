@@ -217,22 +217,26 @@ main.is-glitching > :not(.pin-spacer), main.is-glitching .pin-spacer > * { anima
 }
 .film:nth-child(even) .film-poster { order: 2; }
 .film:nth-child(even) .film-copy { order: 1; }
-.film:nth-child(3n) .film-poster { justify-self: end; }
-.film:nth-child(3n+1) .film-poster { justify-self: center; }
-.film:nth-child(3n+2) .film-poster { justify-self: start; }
 .film-day {
   position: absolute; z-index: 0; top: 8vh; left: 3vw; font-family: var(--font-title); font-size: clamp(160px, 34vw, 520px); line-height: 1; color: transparent;
   -webkit-text-stroke: 1px rgba(255,255,255,.17); pointer-events: none; user-select: none;
 }
 .film:nth-child(even) .film-day { left: auto; right: 3vw; }
-.film-poster { position: relative; z-index: 1; width: min(100%, 420px); }
-.film:nth-child(4n+1) .film-poster { width: min(100%, 480px); }
-.film:nth-child(4n+3) .film-poster { width: min(100%, 360px); }
+.film .film-poster { position: relative; z-index: 1; width: auto; justify-self: center; }
 .film-poster .frame {
+  width: fit-content;
   position: relative; overflow: hidden; border-radius: 3px; background: #000;
   box-shadow: 0 30px 80px rgba(0,0,0,.7), 0 0 0 1px rgba(255,255,255,.06), 0 0 60px rgba(77,255,140,.08);
 }
-.film-poster img { width: 100%; aspect-ratio: 2 / 3; object-fit: cover; filter: url(#vhs-chroma) contrast(1.1) saturate(1.3) brightness(.96); image-rendering: auto; transform: scale(1.015); }
+.film-poster img {
+  height: min(64vh, 600px);
+  width: auto;
+  aspect-ratio: 2 / 3;
+  object-fit: cover;
+  filter: url(#vhs-chroma) contrast(1.1) saturate(1.3) brightness(.96);
+  image-rendering: auto;
+  transform: scale(1.015);
+}
 .film-poster .frame { transform-style: preserve-3d; transition: transform .35s ease-out; }
 .film-poster .frame::after {
   content: ""; position: absolute; inset: 0; pointer-events: none;
@@ -457,6 +461,7 @@ button.stream { background: transparent; border-width: 0 0 1px; border-style: so
   .film { grid-template-columns: 1fr; padding: 12vh 6vw; gap: 31px; min-height: 0; }
   .film:nth-child(even) .film-poster, .film:nth-child(even) .film-copy { order: initial; }
   .film .film-poster { justify-self: start !important; width: min(100%, 280px) !important; }   /* Figma 38:252: the poster sits left over the copy, 280 wide */
+  .film .film-poster img { height: auto !important; width: 100% !important; aspect-ratio: 2 / 3 !important; }
   .film-day { font-size: 44vw; top: 2vh; }
   .list a { grid-template-columns: 28px 60px minmax(0, 1fr) 48px; column-gap: 12px; padding: 12px 4px; min-height: 56px; }
   .list .m, .list .lk, .mine .checklist .m { display: none; }
