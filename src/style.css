@@ -250,18 +250,8 @@ main.is-glitching > :not(.pin-spacer), main.is-glitching .pin-spacer > * { anima
   background: repeating-linear-gradient(0deg, rgba(0,0,0,0) 0 3px, rgba(0,0,0,.22) 3px 4px), linear-gradient(180deg, rgba(255,255,255,.07), transparent 30%);
   mix-blend-mode: multiply;
 }
-/* head switching noise at the bottom of the frame, like a real VHS capture */
-.film-poster .frame::before {
-  content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 9px; z-index: 2; pointer-events: none;
-  background: repeating-linear-gradient(90deg, rgba(255,255,255,.45) 0 7px, rgba(0,0,0,.6) 7px 11px, rgba(120,255,180,.4) 11px 13px, transparent 13px 22px);
-  transform: translateX(-6px); animation: head-switch 1.4s steps(3) infinite; opacity: .55;
-}
-@keyframes head-switch { 50% { transform: translateX(5px); } }
-.film-poster .tc {
-  position: absolute; z-index: 3; left: 16px; right: 16px; display: flex; justify-content: space-between; pointer-events: none;
-  font-family: var(--font-osd); font-size: 15px; font-weight: 700; letter-spacing: .12em; color: #fff; text-shadow: 0 0 8px rgba(0,0,0,.8);
-}
-.film-poster .tc-top { top: 14px; } .film-poster .tc-bottom { bottom: 16px; }
+.film-poster .frame::before { display: none !important; }
+.film-poster .tc { display: none !important; }
 
 /* right side copy container */
 .film-copy { position: relative; max-width: 680px; padding: 0; display: flex; flex-direction: column; }

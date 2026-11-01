@@ -32,10 +32,6 @@ export default function FilmCard({ film }) {
           <span className="stamp" aria-hidden="true">
             Watched
           </span>
-          <span className="tc tc-top" aria-hidden="true">
-            <span>PLAY ▶</span>
-            <span>MCU #{pad}</span>
-          </span>
         </div>
       </div>
 

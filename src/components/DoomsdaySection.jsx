@@ -64,10 +64,6 @@ export default function DoomsdaySection() {
                 borderRadius: '3px'
               }}
             />
-            <span className="tc tc-top" aria-hidden="true">
-              <span>PREVIEW ▶</span>
-              <span>MCU #39</span>
-            </span>
           </div>
         </div>
 
