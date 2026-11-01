@@ -56,13 +56,6 @@ img { display: block; max-width: 100%; }
 button { font: inherit; cursor: pointer; }
 
 /* ---------- fixed layers ---------- */
-/* custom cursor: Marvel / VHS retro neon HUD reticle */
-#cursor {
-  position: fixed; top: 0; left: 0; z-index: 99998; pointer-events: none; width: 36px; height: 36px;
-}
-@media (pointer: fine) {
-  html, body, a, button, input, textarea, select, label, [role="checkbox"] { cursor: none !important; }
-}
 #fog { position: fixed; inset: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }   /* green smoke under everything, js/fog.js */
 main, .footer { position: relative; z-index: 1; }
 .vhs { position: fixed; inset: 0; pointer-events: none; z-index: 40; }
@@ -385,7 +378,7 @@ button.stream { background: transparent; border-width: 0 0 1px; border-style: so
 .overlay--shelf { padding: 0; overflow: hidden; }
 .sr-only { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
 #shelf:focus-visible { outline: none; box-shadow: inset 0 0 0 2px rgba(77,255,140,.45); }   /* the focused tape gets its own frame in the scene; this just marks the view */
-#shelf { position: absolute; inset: 0; width: 100%; height: 100%; display: block; cursor: none; touch-action: none; }
+#shelf { position: absolute; inset: 0; width: 100%; height: 100%; display: block; cursor: grab; touch-action: none; }
 .overlay.overlay--shelf h2 { position: absolute; left: 50%; top: 72px; transform: translateX(-50%); margin: 0; pointer-events: none; line-height: 0; text-shadow: none; }   /* the hand lettered mark, under the deck */
 .overlay--shelf h2 .mark { width: clamp(240px, 24vw, 360px); height: auto; display: block; filter: drop-shadow(0 0 10px rgba(77,255,140,.55)) drop-shadow(0 0 36px rgba(77,255,140,.28)); }   /* tucked under the deck so the rows can fill the frame */
 /* touch screens have no hover to explain and a tap is obvious, so the hint goes */
