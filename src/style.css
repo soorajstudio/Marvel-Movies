@@ -864,30 +864,236 @@ html.is-bare .vhs-track, html.is-bare .hero-inner, html.is-bare .topbar, html.is
   }
 }
 
-/* ---------- Doomsday Section Responsive ---------- */
+/* ---------- Doomsday Section (Mockup UI) ---------- */
 .doomsday-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
-  gap: clamp(32px, 5vw, 64px);
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));
+  gap: clamp(36px, 5vw, 72px);
   align-items: center;
 }
+
+.doomsday-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+}
+
+.doomsday-preview-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 22px;
+  border-radius: 999px;
+  border: 1.5px solid rgba(77, 255, 140, 0.65);
+  background: rgba(7, 9, 12, 0.88);
+  box-shadow: 0 0 16px rgba(77, 255, 140, 0.25), inset 0 0 10px rgba(77, 255, 140, 0.1);
+  font-family: var(--font-osd, monospace);
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: #ffffff;
+  margin-bottom: 18px;
+}
+.doomsday-preview-pill .play-icon {
+  color: var(--green, #4dff8c);
+  font-size: 10px;
+  filter: drop-shadow(0 0 6px rgba(77, 255, 140, 0.9));
+}
+.doomsday-preview-pill .dot {
+  color: var(--green, #4dff8c);
+  opacity: 0.8;
+}
+
+.doomsday-title {
+  font-family: var(--font-title, sans-serif);
+  font-size: clamp(52px, 6.8vw, 96px);
+  line-height: 0.92;
+  color: #ffffff;
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  text-shadow: 0 0 20px rgba(77, 255, 140, 0.55), 0 0 45px rgba(77, 255, 140, 0.25);
+}
+
+.doomsday-title-slash {
+  width: 240px;
+  height: 4px;
+  background: linear-gradient(90deg, transparent 0%, #4dff8c 45%, #00e676 75%, transparent 100%);
+  border-radius: 999px;
+  box-shadow: 0 0 16px rgba(77, 255, 140, 0.95), 0 0 30px rgba(77, 255, 140, 0.6);
+  margin: 10px auto 14px;
+}
+
+.doomsday-tagline-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin: 0 0 28px;
+}
+.doomsday-tagline-line {
+  height: 1.5px;
+  width: 52px;
+}
+.doomsday-tagline-line.left {
+  background: linear-gradient(90deg, transparent, rgba(77, 255, 140, 0.75));
+}
+.doomsday-tagline-line.right {
+  background: linear-gradient(90deg, rgba(77, 255, 140, 0.75), transparent);
+}
+.doomsday-tagline-text {
+  font-family: var(--font-osd, monospace);
+  font-size: clamp(12.5px, 1.3vw, 15px);
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--green, #4dff8c);
+  text-shadow: 0 0 10px rgba(77, 255, 140, 0.7);
+  font-weight: 700;
+}
+
+/* Countdown Card */
 .doomsday-countdown {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 12px;
-  max-width: 520px;
-  margin: 0 0 28px;
-  padding: 18px;
-  background: rgba(7, 9, 12, 0.9);
-  border: 1px solid rgba(77, 255, 140, 0.3);
-  border-radius: 8px;
-  box-shadow: 0 0 35px rgba(31, 61, 43, 0.5), inset 0 0 20px rgba(0, 0, 0, 0.8);
+  max-width: 540px;
+  width: 100%;
+  margin: 0 auto 24px;
+  padding: 18px 8px;
+  background: rgba(7, 9, 12, 0.88);
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+  border: 1.5px solid rgba(77, 255, 140, 0.45);
+  border-radius: 14px;
+  box-shadow: 0 0 30px rgba(77, 255, 140, 0.16), inset 0 0 20px rgba(0, 0, 0, 0.7);
   text-align: center;
 }
+.doomsday-count-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding: 0 4px;
+}
+.doomsday-count-col:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 15%;
+  bottom: 15%;
+  width: 1px;
+  background: rgba(255, 255, 255, 0.15);
+}
+.doomsday-count-num {
+  font-family: var(--font-osd, monospace);
+  font-size: clamp(32px, 3.8vw, 48px);
+  font-weight: 700;
+  line-height: 1;
+  color: #ffffff;
+  text-shadow: 0 0 12px rgba(255, 255, 255, 0.35);
+}
+.doomsday-count-num.is-accent {
+  color: var(--green, #4dff8c);
+  text-shadow: 0 0 14px rgba(77, 255, 140, 0.9);
+}
+.doomsday-count-lbl {
+  font-family: var(--font-osd, monospace);
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--muted, #8d8a80);
+  margin-top: 8px;
+  font-weight: 700;
+}
+.doomsday-count-lbl.is-accent {
+  color: var(--green, #4dff8c);
+}
+
+/* Info Card */
+.doomsday-info-card {
+  max-width: 540px;
+  width: 100%;
+  margin: 0 auto 24px;
+  padding: 20px 26px;
+  background: rgba(7, 9, 12, 0.88);
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+  border: 1.5px solid rgba(77, 255, 140, 0.35);
+  border-radius: 14px;
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.7);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.doomsday-info-row {
+  display: flex;
+  align-items: center;
+  font-family: var(--font-osd, monospace);
+  font-size: 13.5px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.doomsday-info-icon {
+  width: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 14px;
+  color: var(--green, #4dff8c);
+  filter: drop-shadow(0 0 6px rgba(77, 255, 140, 0.75));
+  flex-shrink: 0;
+}
+.doomsday-info-lbl {
+  width: 110px;
+  color: #ffffff;
+  font-weight: 700;
+  flex-shrink: 0;
+  letter-spacing: 0.12em;
+  text-align: left;
+}
+.doomsday-info-sep {
+  color: rgba(255, 255, 255, 0.22);
+  margin: 0 16px 0 6px;
+  font-weight: 300;
+  user-select: none;
+}
+.doomsday-info-val {
+  color: #e6edf3;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-align: left;
+}
+
+/* Story Paragraph */
+.doomsday-synopsis {
+  max-width: 540px;
+  margin: 0 auto;
+  font-family: var(--font-body, system-ui, sans-serif);
+  font-size: 14.5px;
+  line-height: 1.7;
+  color: #c9d1d9;
+  text-align: center;
+}
+
 @media (max-width: 720px) {
   .doomsday-section { padding: 10vh 5vw !important; }
   .doomsday-grid { grid-template-columns: 1fr !important; gap: 36px !important; }
-  .doomsday-countdown { gap: 6px !important; padding: 12px 6px !important; }
+  .doomsday-preview-pill { font-size: 10px; padding: 6px 16px; gap: 8px; margin-bottom: 14px; }
+  .doomsday-title { font-size: clamp(42px, 11vw, 68px); }
+  .doomsday-title-slash { width: 170px; height: 3px; }
+  .doomsday-tagline-text { font-size: 11.5px; letter-spacing: 0.18em; }
+  .doomsday-tagline-line { width: 28px; }
+  .doomsday-countdown { padding: 14px 6px !important; gap: 4px !important; }
+  .doomsday-count-num { font-size: clamp(24px, 6.5vw, 36px); }
+  .doomsday-count-lbl { font-size: 9.5px; letter-spacing: 0.14em; }
+  .doomsday-info-card { padding: 16px 14px; gap: 12px; }
+  .doomsday-info-row { font-size: 11.5px; }
+  .doomsday-info-lbl { width: 88px; }
+  .doomsday-info-sep { margin: 0 10px 0 4px; }
+  .doomsday-synopsis { font-size: 13.5px; padding: 0 6px; }
 }
 
 /* Hide legacy OSD corners */
