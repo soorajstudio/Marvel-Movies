@@ -3,6 +3,7 @@
   inset: 0;
   z-index: 2147483647;
   pointer-events: none;
+  overflow: hidden;
 }
 
 .target-cursor__corner {
@@ -11,9 +12,11 @@
   left: 0;
   box-sizing: border-box;
   border-style: solid;
-  border-color: var(--target-cursor-color, #ffffff);
+  border-color: var(--target-cursor-color, #4dff8c);
   transform-origin: 0 0;
   will-change: transform;
+  pointer-events: none;
+  filter: drop-shadow(0 0 4px rgba(77, 255, 140, 0.85)) drop-shadow(0 0 8px rgba(77, 255, 140, 0.45));
 }
 
 .target-cursor__dot {
@@ -21,8 +24,10 @@
   top: 0;
   left: 0;
   border-radius: 50%;
-  background: var(--target-cursor-color, #ffffff);
+  background: var(--target-cursor-color, #4dff8c);
   will-change: transform;
+  pointer-events: none;
+  box-shadow: 0 0 6px #4dff8c, 0 0 12px rgba(77, 255, 140, 0.85);
 }
 
 .target-cursor__label {

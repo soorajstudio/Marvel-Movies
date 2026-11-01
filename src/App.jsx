@@ -97,20 +97,20 @@ function AppContent() {
       <TargetCursor
         spinDuration={2}
         hoverDuration={0.2}
-        size={36}
+        size={38}
         cornerSize={12}
         thickness={3}
         padding={6}
         dotSize={4}
-        cursorColor="#ffffff"
-        cursorColorOnTarget="#ffffff"
-        blendMode="difference"
+        cursorColor="#4dff8c"
+        cursorColorOnTarget="#66ff99"
+        blendMode="normal"
         parallaxOn
         matchRadius
-        showLabel
+        showLabel={false}
         clickEffect
         hideDefaultCursor
-        targetSelector=".cursor-target, button, a, [role='button'], .film-poster, .shelf-card, .timeline-nav-item, .view-pill, .chk, .watch, .rate, .audio-fab, .tape-thumb"
+        targetSelector="button, a, [role='button'], .timeline-nav-item, .view-pill, .chk, .watch, .rate, .audio-fab, .tape-thumb, .deck-badge, .cursor-target"
       />
       <VhsOsd />
       <Header />

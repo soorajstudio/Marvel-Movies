@@ -20,20 +20,20 @@ const resolveElement = value => (value && 'current' in value ? value.current : v
 
 const TargetCursor = ({
   targetSelector = '.cursor-target',
-  cursorColor = '#ffffff',
-  cursorColorOnTarget,
+  cursorColor = '#4dff8c',
+  cursorColorOnTarget = '#66ff99',
   spinDuration = 2,
   hoverDuration = 0.2,
   parallaxOn = true,
   hideDefaultCursor = true,
-  size = 36,
+  size = 38,
   cornerSize = 12,
   thickness = 3,
   padding = 6,
   matchRadius = true,
   dotSize = 4,
-  blendMode = 'difference',
-  showLabel = true,
+  blendMode = 'normal',
+  showLabel = false,
   clickEffect = true,
   container
 }) => {
@@ -76,11 +76,16 @@ const TargetCursor = ({
     const root = rootRef.current;
     if (!host || !root) return undefined;
 
-    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const style = document.createElement('style');
     document.head.appendChild(style);
 
-    const pointer = { x: 0, y: 0, inside: false, seen: false, pressed: false };
+    const pointer = {
+      x: typeof window !== 'undefined' ? window.innerWidth / 2 : 0,
+      y: typeof window !== 'undefined' ? window.innerHeight / 2 : 0,
+      inside: true,
+      seen: false,
+      pressed: false
+    };
     const centerX = { x: 0, v: 0 };
     const centerY = { x: 0, v: 0 };
     const halfW = { x: 0, v: 0 };
@@ -89,11 +94,11 @@ const TargetCursor = ({
     const turn = { x: 0, v: 0 };
     const lock = { x: 0, v: 0 };
     const press = { x: 0, v: 0 };
-    const presence = { x: 0, v: 0 };
+    const presence = { x: 1, v: 0 };
     let target = null;
     let targetRadius = 0;
     let quarter = 0;
-    let spinSpeed = 0;
+    let spinSpeed = (Math.PI * 2) / Math.max(0.5, settingsRef.current.spinDuration);
     let raf = 0;
     let last = 0;
     let lastLabel = '';
@@ -133,7 +138,6 @@ const TargetCursor = ({
         quarter = Math.round(angle / QUARTER);
         const corner = parseFloat(getComputedStyle(target).borderTopLeftRadius) || 0;
         targetRadius = corner;
-        spinSpeed = 0;
       }
     };
 
@@ -162,14 +166,23 @@ const TargetCursor = ({
       if (locked) {
         const cx = rect.left + rect.width / 2;
         const cy = rect.top + rect.height / 2;
-        const lean = s.parallaxOn ? 0.08 : 0;
-        goalX = cx + (pointer.x - cx) * lean;
-        goalY = cy + (pointer.y - cy) * lean;
-        const odd = Math.abs(quarter) % 2 === 1;
-        const w = rect.width / 2 + s.padding;
-        const h = rect.height / 2 + s.padding;
-        goalW = odd ? h : w;
-        goalH = odd ? w : h;
+        // Keep reticle tightly framing or surrounding cursor without expanding hundreds of pixels away
+        const isCompact = rect.width <= 140 && rect.height <= 60;
+        if (isCompact) {
+          const maxHalf = 32;
+          const odd = Math.abs(quarter) % 2 === 1;
+          const w = Math.min(rect.width / 2 + s.padding, maxHalf);
+          const h = Math.min(rect.height / 2 + s.padding, maxHalf);
+          goalW = odd ? h : w;
+          goalH = odd ? w : h;
+          goalX = pointer.x + (cx - pointer.x) * 0.25;
+          goalY = pointer.y + (cy - pointer.y) * 0.25;
+        } else {
+          goalW = (s.size / 2) * 1.25;
+          goalH = (s.size / 2) * 1.25;
+          goalX = pointer.x;
+          goalY = pointer.y;
+        }
         goalR = s.matchRadius ? Math.min(targetRadius + Math.max(0, s.padding), s.cornerSize) : 0;
       }
 
@@ -190,14 +203,12 @@ const TargetCursor = ({
       spring(halfH, goalH, snapK, snapC, dt);
       spring(radius, goalR, snapK, 2 * snapW, dt);
 
-      if (locked) {
-        spring(turn, quarter * QUARTER, snapK, snapC, dt);
-      } else {
-        const speed = s.spinDuration > 0 && !reduce ? (Math.PI * 2) / s.spinDuration : 0;
-        spinSpeed += (speed - spinSpeed) * (1 - Math.exp(-dt * 3));
-        turn.v = spinSpeed;
-        turn.x += spinSpeed * dt;
-      }
+      // Continuous animated rotation: always spins smoothly
+      const baseSpeed = s.spinDuration > 0 ? (Math.PI * 2) / s.spinDuration : Math.PI;
+      const targetSpeed = locked ? baseSpeed * 1.25 : baseSpeed;
+      spinSpeed += (targetSpeed - spinSpeed) * (1 - Math.exp(-dt * 4));
+      turn.v = spinSpeed;
+      turn.x += spinSpeed * dt;
 
       const squeeze = 1 - press.x * 0.14;
       const cos = Math.cos(turn.x);
@@ -214,6 +225,9 @@ const TargetCursor = ({
       const degrees = (turn.x * 180) / Math.PI;
       let left = Infinity;
       let top = Infinity;
+
+      const color = lock.x > 0.3 ? (s.cursorColorOnTarget || '#66ff99') : (s.cursorColor || '#4dff8c');
+
       cornerRefs.current.forEach((corner, i) => {
         if (!corner) return;
         const [lx, ly] = local[i];
@@ -226,6 +240,7 @@ const TargetCursor = ({
         corner.style.height = `${s.cornerSize}px`;
         corner.style.borderWidth = `${s.thickness}px 0 0 ${s.thickness}px`;
         corner.style.borderTopLeftRadius = `${r.toFixed(2)}px`;
+        corner.style.borderColor = color;
       });
 
       const dot = dotRef.current;
@@ -234,6 +249,7 @@ const TargetCursor = ({
         dot.style.transform = `translate3d(${pointer.x}px, ${pointer.y}px, 0) translate(-50%, -50%) scale(${dotScale.toFixed(3)})`;
         dot.style.width = `${s.dotSize}px`;
         dot.style.height = `${s.dotSize}px`;
+        dot.style.backgroundColor = color;
       }
 
       const label = labelRef.current;
@@ -246,8 +262,6 @@ const TargetCursor = ({
         label.style.opacity = shown.toFixed(3);
       }
 
-      const mix = s.cursorColorOnTarget ? Math.round(Math.max(0, Math.min(1, lock.x)) * 100) : 0;
-      const color = mix ? `color-mix(in oklab, ${s.cursorColorOnTarget} ${mix}%, ${s.cursorColor})` : s.cursorColor;
       if (color !== lastColor) {
         root.style.setProperty('--target-cursor-color', color);
         lastColor = color;
@@ -257,10 +271,8 @@ const TargetCursor = ({
       const resting =
         !pointer.inside &&
         presence.x < 0.002 &&
-        Math.abs(presence.v) < 0.002 &&
-        Math.abs(lock.x) < 0.002 &&
-        Math.abs(press.x) < 0.002;
-      const spinning = pointer.inside && !locked && spinSpeed > 0.0001;
+        Math.abs(presence.v) < 0.002;
+      const spinning = pointer.inside && spinSpeed > 0.0001;
       const moving =
         Math.abs(centerX.v) + Math.abs(centerY.v) + Math.abs(halfW.v) + Math.abs(halfH.v) + Math.abs(turn.v) > 0.01 ||
         Math.abs(goalX - centerX.x) + Math.abs(goalY - centerY.x) > 0.05 ||
@@ -323,10 +335,21 @@ const TargetCursor = ({
       wake();
     };
 
+    const onEnter = event => {
+      pointer.inside = true;
+      if (event.clientX || event.clientY) {
+        pointer.x = event.clientX;
+        pointer.y = event.clientY;
+      }
+      hideCursor();
+      wake();
+    };
+
     window.addEventListener('pointermove', onPointerMove, { passive: true });
     window.addEventListener('pointerdown', onPointerDown, { passive: true });
     window.addEventListener('pointerup', onPointerUp, { passive: true });
     window.addEventListener('scroll', onScroll, { passive: true, capture: true });
+    document.documentElement.addEventListener('pointerenter', onEnter);
     document.documentElement.addEventListener('pointerleave', onLeave);
     window.addEventListener('blur', onLeave);
 
@@ -337,6 +360,7 @@ const TargetCursor = ({
       window.removeEventListener('pointerdown', onPointerDown);
       window.removeEventListener('pointerup', onPointerUp);
       window.removeEventListener('scroll', onScroll, { capture: true });
+      document.documentElement.removeEventListener('pointerenter', onEnter);
       document.documentElement.removeEventListener('pointerleave', onLeave);
       window.removeEventListener('blur', onLeave);
       lastScope?.removeAttribute('data-target-cursor-scope');
