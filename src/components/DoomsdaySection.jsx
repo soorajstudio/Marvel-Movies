@@ -52,7 +52,7 @@ export default function DoomsdaySection() {
         <div className="film-poster" style={{ width: '100%', maxWidth: '440px', margin: '0 auto' }}>
           <div className="frame">
             <img
-              src="/assets/images/39-avengers-doomsday.jpg"
+              src={`${import.meta.env.BASE_URL}assets/images/39-avengers-doomsday.jpg`}
               alt="Doctor Doom - Avengers: Doomsday poster"
               loading="lazy"
               decoding="async"

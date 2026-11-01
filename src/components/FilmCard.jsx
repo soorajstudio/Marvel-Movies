@@ -8,7 +8,7 @@ export default function FilmCard({ film }) {
   const rating = ratings[film.slug];
 
   const justwatchUrl = `https://www.justwatch.com/us/search?q=${encodeURIComponent(`${film.title} ${film.year}`)}`;
-  const posterSrc = film.poster.startsWith('/') ? film.poster : `/${film.poster}`;
+  const posterSrc = `${import.meta.env.BASE_URL}${film.poster.replace(/^\//, '')}`;
 
   return (
     <section

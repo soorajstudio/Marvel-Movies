@@ -18,7 +18,7 @@ export default function Hero() {
         <h1 className="title">
           <img
             className="mark"
-            src="/assets/images/hero-type.png"
+            src={`${import.meta.env.BASE_URL}assets/images/hero-type.png`}
             alt="Marvel Cinematic Universe"
             width="2108"
             height="746"

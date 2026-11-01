@@ -1,4 +1,4 @@
-﻿import React from 'react';
+import React from 'react';
 import { FILMS } from '../data/films';
 import { useApp } from '../context/AppContext';
 
@@ -18,7 +18,7 @@ export default function ViewMine() {
         <img
           className="mark"
           loading="eager"
-          src="/assets/images/mylist-type.svg"
+          src={`${import.meta.env.BASE_URL}assets/images/mylist-type.svg`}
           width="1698"
           height="630"
           alt="My list"

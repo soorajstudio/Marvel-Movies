@@ -1,4 +1,4 @@
-﻿import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo } from 'react';
 import { FILMS } from '../data/films';
 import { useApp } from '../context/AppContext';
 
@@ -57,7 +57,7 @@ export default function ViewList() {
         <img
           className="mark"
           loading="eager"
-          src="/assets/images/lineup-type.svg"
+          src={`${import.meta.env.BASE_URL}assets/images/lineup-type.svg`}
           width="1338"
           height="570"
           alt="The lineup"
@@ -125,7 +125,7 @@ export default function ViewList() {
           const pad = String(f.day).padStart(2, '0');
           const isWatched = watched.has(f.slug);
           const rating = ratings[f.slug];
-          const posterPath = f.poster.startsWith('/') ? f.poster : `/${f.poster}`;
+          const posterPath = `${import.meta.env.BASE_URL}${f.poster.replace(/^\//, '')}`;
 
           return (
             <li

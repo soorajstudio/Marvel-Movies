@@ -6,8 +6,8 @@ export default function FloatingAudioPlayer() {
   const audioRef = useRef(null);
 
   const tracks = [
-    { title: 'The Avengers: Theme', src: '/assets/audio/marvel-theme.mp3' },
-    { title: 'Alan Silvestri: Main Titles', src: '/assets/audio/marvel-orchestral.mp3' }
+    { title: 'The Avengers: Theme', src: `${import.meta.env.BASE_URL}assets/audio/marvel-theme.mp3` },
+    { title: 'Alan Silvestri: Main Titles', src: `${import.meta.env.BASE_URL}assets/audio/marvel-orchestral.mp3` }
   ];
 
   const currentTrack = tracks[trackIndex];

@@ -15,7 +15,7 @@ export default function Header() {
           title="Back to the start"
           onClick={rewindToTop}
         >
-          <img src="/assets/images/nav-badge.png" alt="Avengers Emblem" width="50" height="50" />
+          <img src={`${import.meta.env.BASE_URL}assets/images/nav-badge.png`} alt="Avengers Emblem" width="50" height="50" />
         </button>
       </nav>
     </header>
