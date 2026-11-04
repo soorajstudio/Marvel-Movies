@@ -1,16 +1,69 @@
-# React + Vite
+# 🎬 Marvel Movies – MCU Timeline
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+Explore the Marvel Cinematic Universe (MCU) through an interactive movie timeline.
 
-Currently, two official plugins are available:
+This project provides a chronological view of Marvel movies, helping fans explore the MCU movie collection and its cinematic timeline.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## 🌐 Live Demo
 
-## React Compiler
+[Visit Marvel Movies](https://soorajstudio.github.io/Marvel-Movies/)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## ✨ Features
 
-## Expanding the Oxlint configuration
+- Marvel movie timeline
+- Chronological movie browsing
+- Modern and responsive user interface
+- Easy-to-use navigation
+- Interactive movie exploration
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+## 🛠️ Tech Stack
+
+- React.js
+- Vite
+- JavaScript
+- HTML5
+- CSS3
+
+## 🚀 Getting Started
+
+Clone the repository:
+
+```bash
+git clone https://github.com/soorajstudio/Marvel-Movies.git
+```
+
+Navigate to the project directory:
+
+```bash
+cd Marvel-Movies
+```
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+Start the development server:
+
+```bash
+npm run dev
+```
+
+## 📸 Screenshots
+
+Add screenshots of the application here.
+
+## 🌍 Deployment
+
+Hosted using GitHub Pages.
+
+## 👨‍💻 Developer
+
+**Sooraj MS**
+
+GitHub: [@soorajstudio](https://github.com/soorajstudio)
+
+---
+
+If you like this project, consider giving it a ⭐!
